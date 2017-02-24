@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+require 'pry'
+require 'yaml'
+require 'erb'
+require 'active_support'
+require 'active_support/inflector'
+
+def makeTable name, cols
+  table = {name: ActiveSupport::Inflector.tableize(name)}
+  table[:columns] = cols.map {|a, b| makeColumn(a, b)}
+  table
+end
+
+def makeColumn name, desc
+  col = {name: name, nullable: true}
+  parts = desc.split(', ')
+  col[:type] = parts[0]
+  if parts.include? "non-null"
+    col[:nullable] = false
+  end
+  if parts.include? "indexed"
+    col[:indexed] = true
+  end
+  col
+end
+
+
+input = ARGV[0] || './db/schema.yaml'
+output = ARGV[1] || './db/schema.rb'
+templateFile = File.join(File.dirname(__FILE__), '../templates/main.rb.erb')
+template = ERB.new(File.read(templateFile), nil, '-')
+schema = YAML.load_file(input)
+
+@tables = []
+schema.map {|key, val|
+  if key == 'User'
+    @user = makeTable(key, val)
+  else
+    @tables.append(makeTable(key, val))
+  end
+}
+
+@version = 5
+
+File.open(output, 'w') do |file|
+  file.write(template.result)
+end
