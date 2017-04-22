@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: <%= @version %>) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 <% for column in @user[:columns] -%>
 <% if !column[:indexed] -%>
-    t.index ["<%= column[:name] %>"], name: "index_<%= column[:name] %>_on_<%= table[:name] %>"<% if !column[:unique] %>, unique: true<% end %>, using: :btree
+    t.index ["<%= column[:name] %>"], name: "index_<%= column[:name] %>_on_users"<% if !column[:unique] %>, unique: true<% end %>, using: :btree
 <% end -%>
 <% end -%>
   end
