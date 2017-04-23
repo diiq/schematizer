@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: <%= @version %>) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 <% for column in @user[:columns] -%>
-<% if !column[:indexed] -%>
+<% if column[:indexed] -%>
     t.index ["<%= column[:name] %>"], name: "index_<%= column[:name] %>_on_users"<% if column[:unique] %>, unique: true<% end %>, using: :btree
 <% end -%>
 <% end -%>
