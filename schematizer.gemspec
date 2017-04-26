@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'schematizer'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2017-02-24'
   s.summary     = "Converts yaml to schema.rb"
   s.description = "For rapid prototyping in rails"

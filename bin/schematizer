@@ -21,6 +21,9 @@ def makeColumn name, desc
   if parts.include? "indexed"
     col[:indexed] = true
   end
+  if parts.include? "unique"
+    col[:unique] = true
+  end
   col
 end
 
