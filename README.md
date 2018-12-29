@@ -2,7 +2,7 @@
 ## Intallation
 ```
 $ gem install specific_install
-$ gem specific_install -l git@github.com:diiq/schematizer.git
+$ gem specific_install -l https://github.com/diiq/schematizer.git
 ```
 ## Usage
 
