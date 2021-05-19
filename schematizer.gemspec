@@ -10,5 +10,5 @@ Gem::Specification.new do |s|
   s.files       = ["templates/main.rb.erb"]
   s.homepage    = 'http://rubygems.org/gems/schematizer'
   s.license     = 'MIT'
-  s.add_runtime_dependency 'activesupport', '~> 5'
+  s.add_runtime_dependency 'activesupport', '>= 5', '< 7'
 end
